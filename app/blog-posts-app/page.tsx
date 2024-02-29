@@ -6,7 +6,7 @@ const BlogPostsApp = () => {
             <h1 className='head_text text-center'>
                 Discover & Share
                 <br className='max-md:hidden' />
-                <span className='orange_gradient text-center'> AI-Powered Posts</span>
+                <span className='orange_gradient text-center'> Blog Posts</span>
             </h1>
 
             <p className='desc text-center'>

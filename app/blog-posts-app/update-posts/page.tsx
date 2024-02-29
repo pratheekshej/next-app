@@ -30,9 +30,7 @@ const UpdatePrompt = () => {
     const updatePrompt = async (e: Event) => {
         e.preventDefault();
         setIsSubmitting(true);
-
         if (!promptId) return alert("Missing PromptId!");
-
         try {
             const response = await fetch(`/api/prompt/${promptId}`, {
                 method: "PATCH",
@@ -41,7 +39,6 @@ const UpdatePrompt = () => {
                     tag: post.tag,
                 }),
             });
-
             if (response.ok) {
                 router.push("/blog-posts-app");
             }
@@ -55,6 +52,7 @@ const UpdatePrompt = () => {
     return (
         <Form
             type='Edit'
+            label='Update'
             post={post}
             setPost={setPost}
             submitting={submitting}

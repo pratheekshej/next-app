@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }: any) => {
+const Form = ({ type, post, setPost, submitting, handleSubmit, label }: any) => {
     return (
         <section className='w-full max-w-full flex flex-col items-center justify-start'>
             <h1 className='head_text text-left'>
@@ -47,7 +47,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }: any) => {
                 </label>
 
                 <div className='flex-end mx-3 mb-5 gap-4'>
-                    <Link href='/' className='text-gray-500 text-sm'>
+                    <Link href='/blog-posts-app' className='text-gray-500 text-sm'>
                         Cancel
                     </Link>
 
@@ -56,7 +56,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }: any) => {
                         disabled={submitting}
                         className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
                     >
-                        {submitting ? `${type}ing...` : type}
+                        {submitting ? `${label || type}ing...` : (label || type)}
                     </button>
                 </div>
             </form>
