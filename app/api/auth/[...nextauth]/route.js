@@ -2,7 +2,6 @@ import NextAuth from "next-auth/next";
 import GoogelProvider from "next-auth/providers/google";
 import { connectToDB } from "../../../../utils/database";
 import User from "../../../../models/user";
-// import { GoogleProfile } from "next-auth/providers/google";
 
 const googleProvider = {
     clientId: process.env.GOOGLE_ID,
@@ -18,16 +17,13 @@ const handler = NextAuth({
             // store the user id from MongoDB to session
             const sessionUser = await User.findOne({ email: session.user.email });
             session.user.id = sessionUser._id.toString();
-
             return session;
         },
         async signIn({ profile }) {
             try {
                 await connectToDB();
-
                 // check for existing user
                 const userExists = await User.findOne({ email: profile.email });
-
                 // create a user otherwise
                 if (!userExists) {
                     await User.create({
@@ -36,7 +32,6 @@ const handler = NextAuth({
                         image: profile.picture
                     });
                 }
-
                 return true;
             } catch (error) {
                 console.log(error)
