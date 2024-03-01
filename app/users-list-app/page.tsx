@@ -29,7 +29,7 @@ const UsersPage = async () => {
                 <tbody>
                     {users.map((user, i) => {
                         return (
-                            <tr className='hover hover:cursor-pointer'>
+                            <tr key={user.id} className='hover hover:cursor-pointer'>
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
