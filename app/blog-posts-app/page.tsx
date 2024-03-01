@@ -10,8 +10,7 @@ const BlogPostsApp = () => {
             </h1>
 
             <p className='desc text-center'>
-                Blog posts is an open-source AI prompting tool for modern world to
-                discover, create and share creative blogs
+                Blog posts is an open-source prompting tool for modern world to discover, create and share creative blog posts
             </p>
 
             <Feed />

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import PromptCard from "./PromptCard";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import ComponentLoader from "./Loader";
 
 const PromptCardList = ({ data, handleTagClick }: any) => {
     const router = useRouter();
@@ -26,6 +28,7 @@ const PromptCardList = ({ data, handleTagClick }: any) => {
 
 const Feed = () => {
     const [allPosts, setAllPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Search states
     const [searchText, setSearchText] = useState("");
@@ -35,9 +38,11 @@ const Feed = () => {
         const response = await fetch("/api/prompt");
         const data = await response.json();
         setAllPosts(data);
+        setIsLoading(false);
     };
 
     useEffect(() => {
+        setIsLoading(true);
         fetchPosts();
     }, []);
 
@@ -88,15 +93,19 @@ const Feed = () => {
 
             {/* All Prompts */}
             {
-                searchText ?
-                    <PromptCardList
-                        data={searchedResults}
-                        handleTagClick={(tag: string) => handleTagClick(tag, allPosts)}
-                    /> :
-                    <PromptCardList
-                        data={allPosts}
-                        handleTagClick={(tag: string) => handleTagClick(tag, allPosts)}
-                    />
+                !isLoading ? (
+                    searchText ?
+                        <PromptCardList
+                            data={searchedResults}
+                            handleTagClick={(tag: string) => handleTagClick(tag, allPosts)}
+                        /> :
+                        <PromptCardList
+                            data={allPosts}
+                            handleTagClick={(tag: string) => handleTagClick(tag, allPosts)}
+                        />
+                ) : (
+                    <ComponentLoader />
+                )
 
             }
         </section>

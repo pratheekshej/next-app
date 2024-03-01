@@ -15,7 +15,10 @@ const CreatePost = () => {
     const createPost = async (e: Event) => {
         e.preventDefault();
         setIsSubmitting(true);
-
+        /* if (session) {
+            console.log('>> session data : ', session);
+            return;
+        } */
         try {
             const response = await fetch("/api/prompt/new", {
                 method: "POST",
@@ -23,6 +26,7 @@ const CreatePost = () => {
                     prompt: post.prompt,
                     userId: session?.user.id,
                     tag: post.tag,
+                    name: session.user.name
                 }),
             });
 
@@ -39,6 +43,7 @@ const CreatePost = () => {
     return (
         <Form
             type='Create'
+            ingText='Creating'
             post={post}
             setPost={setPost}
             submitting={submitting}

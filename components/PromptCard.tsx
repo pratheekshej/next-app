@@ -13,11 +13,8 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }: any) => 
     const [copied, setCopied] = useState(false);
 
     const handleProfileClick = () => {
-        console.log(post);
-
         if (post.creator._id === session?.user.id) return router.push("/blog-posts-app/profile");
-
-        router.push(`/blog-posts-app/profile/${post.creator._id}?name=${post.creator.username}`);
+        router.push(`/blog-posts-app/profile/${post.creator._id}?name=${post.creator.name}`);
     };
 
     const handleCopy = () => {
@@ -43,7 +40,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }: any) => 
 
                     <div className='flex flex-col'>
                         <h3 className='font-satoshi font-semibold text-gray-900'>
-                            {post.creator.username}
+                            {post.creator.name}
                         </h3>
                         <p className='font-inter text-sm text-gray-500'>
                             {post.creator.email}
@@ -73,7 +70,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }: any) => 
                 #{post.tag}
             </p>
 
-            {session?.user.id === post.creator._id && pathName === "/blog-posts-app/profile" && (
+            {(session?.user.id === post.creator._id) && pathName === "/blog-posts-app/profile" && (
                 <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
                     <p
                         className='font-inter text-sm green_gradient cursor-pointer'

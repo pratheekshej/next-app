@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit, label }: any) => {
+const Form = ({ type, post, setPost, submitting, handleSubmit, label, ingText }: any) => {
     return (
         <section className='w-full max-w-full flex flex-col items-center justify-start'>
             <h1 className='head_text text-left'>
@@ -17,7 +17,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, label }: any) => 
             >
                 <label>
                     <span className='font-satoshi font-semibold text-base text-gray-700'>
-                        Your AI Prompt
+                        Your New Prompt
                     </span>
 
                     <textarea
@@ -25,7 +25,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, label }: any) => 
                         onChange={(e) => setPost({ ...post, prompt: e.target.value })}
                         placeholder='Write your post here'
                         required
-                        className='form_textarea '
+                        className='form_textarea'
                     />
                 </label>
 
@@ -56,7 +56,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit, label }: any) => 
                         disabled={submitting}
                         className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
                     >
-                        {submitting ? `${label || type}ing...` : (label || type)}
+                        {submitting ? `${`${ingText}...` || `${type}ing...`}` : (label || type)}
                     </button>
                 </div>
             </form>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "../../../components/Form";
+import ComponentLoader from "@/components/Loader";
 
 const UpdatePrompt = () => {
     const router = useRouter();
@@ -11,19 +12,20 @@ const UpdatePrompt = () => {
     const promptId = searchParams.get("id");
 
     const [post, setPost] = useState({ prompt: "", tag: "", });
+    const [isLoading, setIsLoading] = useState(false);
     const [submitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const getPromptDetails = async () => {
+            setIsLoading(true);
             const response = await fetch(`/api/prompt/${promptId}`);
             const data = await response.json();
-
             setPost({
                 prompt: data.prompt,
                 tag: data.tag,
             });
+            setIsLoading(false);
         };
-
         if (promptId) getPromptDetails();
     }, [promptId]);
 
@@ -50,14 +52,17 @@ const UpdatePrompt = () => {
     };
 
     return (
-        <Form
-            type='Edit'
-            label='Update'
-            post={post}
-            setPost={setPost}
-            submitting={submitting}
-            handleSubmit={updatePrompt}
-        />
+        !isLoading ?
+            <Form
+                type='Edit'
+                label='Update'
+                ingText='Updating'
+                post={post}
+                setPost={setPost}
+                submitting={submitting}
+                handleSubmit={updatePrompt}
+            /> :
+            <ComponentLoader />
     );
 };
 
