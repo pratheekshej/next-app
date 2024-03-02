@@ -9,8 +9,8 @@ export default function Home() {
   const className = 'font-bold cursor-pointer text-blue-700';
 
   return (
-    <div className="h-full flex flex-col items-center justify-center text-black bg-gradient-to-b from-white to-green-200">
-      <h1 className="text-9xl mb-2 font-satoshi font-bold tracking-wide"><span className='text-green-500'>Up</span> NexT</h1>
+    <div className="min-h-full flex flex-col items-center justify-center text-black bg-gradient-to-b from-white to-green-200">
+      <h1 className="text-9xl mb-2 font-satoshi font-bold tracking-wide flex flex-row items-center w-full justify-center flex-wrap"><span className='text-green-500'>Up</span> NexT</h1>
 
       {
         seeMore ?
